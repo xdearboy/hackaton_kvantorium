@@ -1,8 +1,38 @@
-target-version = "py311"
-line-length = 100
+# конфиг для форматтера 
 
-[lint]
-select = ["E", "F", "W", "I", "UP"]
+preview = true
+line-length = 100
+indent-width = 2
 
 [format]
-quote-style = "double"
+preview = true
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = true
+docstring-code-format = true
+
+[lint]
+ignore = ["RUF001", "RUF002", "RUF003"]
+select = [
+    "F",
+    "G",
+    "PERF",
+    "RUF",
+    "W6",
+    "E71",
+    "E72",
+    "E112",
+    "E113",
+    "E203",
+    "E272",
+    "E702",
+    "E703",
+    "E731",
+    "W191",
+    "W291",
+    "W293",
+    "UP039",
+]
+
+[lint.pydocstyle]
+convention = "google"

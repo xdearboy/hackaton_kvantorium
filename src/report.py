@@ -1,8 +1,4 @@
-import json
-import os
 
-from src.manage_owner import Owner
-from src.shop import Shop
 
 
 class Report:
@@ -13,7 +9,7 @@ class Report:
         if not self.pets:
             return "у владельца пока нет питомцев."
 
-        lines = ["=== репорт об состоянии питомцев ==="]
+        lines = ["--- отчет о состоянии питомцев ---"]
         for pet in self.pets:
             status = pet.get_status()
             name = status["name"]
@@ -34,7 +30,7 @@ class Report:
             elif happiness < 30:
                 state = "грустит (требуют игр)"
             else:
-                state = "стабильное"
+                state = "нормальное"
 
             lines.append(
                 f"- {name}: состояние: {state} | здоровье: {health} | голод: {hunger} | счастье: {happiness}"
