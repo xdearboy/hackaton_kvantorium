@@ -55,11 +55,11 @@ class Pet:
             "hunger": self._hunger,
             "happiness": self._happiness,
             "health": self._health,
-            "is_alive": self._is_alive
+            "is_alive": self._is_alive,
         }
 
     def __str__(self) -> str:
-        status = "Жив" if self._is_alive else "Мёртв"
+        status = "Жив(а)" if self._is_alive else "Мёртв(а)"
         return f"питомец: {self._name} [{status}]. голод питомца: {self._hunger}, счастье: {self._happiness}, здоровье: {self._health}"
 
 
@@ -83,6 +83,7 @@ class Cat(Pet):
             self._health = max(0, self._health - 10)
             if self._health <= 0:
                 self._is_alive = False
+
 
 class Dog(Pet):
     def __init__(self, pet_id: int, name: str, weight: float):

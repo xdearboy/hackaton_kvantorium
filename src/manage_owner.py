@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from src.manage_pets import Pet
+from src.shop import Shop
 
 
 class Owner:
@@ -69,7 +70,13 @@ class Owner:
         else:
             self._log_activity(f"ошибка сна: питомец {pet_name} не найден.")
 
-    def buy_item(self, item_name: str, price: int):
+    def buy_item(self, shop: "Shop", item_name: str):
+        price = shop.get_price(item_name)
+
+        if price is None:
+            self._log_activity(f"товар '{item_name}' не найден в магазине.")
+            return
+
         if self._money >= price:
             self._money -= price
             item_key = item_name.lower()

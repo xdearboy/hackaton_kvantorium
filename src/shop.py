@@ -17,9 +17,14 @@ class Shop:
             {"name": "лакомство", "price": 5, "description": "вкусняшка"},
         ]
 
+    def get_price(self, item_name: str) -> int:
+        for item in self.items:
+            if item["name"].lower() == item_name.lower():
+                return item["price"]
+        return None
+
     def show_items(self):
         print(f"{'название':<10} | {'цена':<5} | описание")
         print("-" * 45)
         for item in self.items:
             print(f"{item['name']:<10} | {item['price']:<5} | {item['description']}")
-
