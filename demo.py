@@ -6,7 +6,7 @@ from src.game import Game
 
 
 print('--- запуск демо игры...---')
-owner = Owner(1, 'Арсений', 'lovelisa228@mail.ru')
+owner = Owner(1, 'Арсений', 'test@d3vo.ru')
 shop = Shop()
 
 cat = Cat(101, 'Василиса', 3.5)

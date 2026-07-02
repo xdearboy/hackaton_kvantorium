@@ -6,28 +6,70 @@ from src.report import Report
 
 
 class Game:
+  """
+  Основной класс игры "Виртуальный питомец".
+
+  Свойства:
+      _owner (Owner) - владелец питомцев
+      _shop (Shop) - магазин товаров
+      _day_counter (int) - счётчик дней (начинается с 1)
+      _is_running (bool) - статус работы игры
+
+  Методы:
+      start_day() -> None - начать новый день (вызывает tick для владельца)
+      show_status() -> None - вывести статус игры в консоль
+      get_report() -> str - получить отчёт о состоянии питомцев
+      save_game(filename) -> None - сохранить игру в JSON-файл
+      load_game(filename) -> None - загрузить игру из JSON-файла
+  """
+
   def __init__(self, owner: Owner, shop: Shop):
+    """
+    Инициализация игры.
+
+    Аргументы:
+        owner (Owner): владелец питомцев
+        shop (Shop): магазин товаров
+    """
     self._owner = owner
     self._shop = shop
     self._day_counter: int = 1
     self._is_running: bool = True
 
-  def start_day(self):
+  def start_day(self) -> None:
+    """
+    Начать новый день. Вызывает tick() для владельца и увеличивает счётчик дней.
+    """
     if not self._is_running:
       return
     self._owner.tick()
     self._day_counter += 1
 
-  def show_status(self):
+  def show_status(self) -> None:
+    """
+    Выводит текущий статус игры (день, имя игрока, баланс).
+    """
     status = self._owner.get_status()
     print(f'день: {self._day_counter}')
     print(f'игрок: {status["name"]} | баланс: {status["money"]} руб')
 
   def get_report(self) -> str:
+    """
+    Генерирует отчёт о состоянии всех питомцев.
+
+    Возвращает:
+        str: текстовый отчёт
+    """
     report_generator = Report(self._owner._pets)
     return report_generator.generate()
 
   def save_game(self, filename: str) -> None:
+    """
+    Сохраняет текущее состояние игры в JSON-файл.
+
+    Аргументы:
+        filename (str): имя файла для сохранения
+    """
     owner_status = self._owner.get_status()
 
     pets_data = []
@@ -54,6 +96,12 @@ class Game:
       json.dump(data, f, ensure_ascii=False, indent=4)
 
   def load_game(self, filename: str) -> None:
+    """
+    Загружает состояние игры из JSON-файла.
+
+    Аргументы:
+        filename (str): имя файла для загрузки
+    """
     with open(filename, 'r', encoding='utf-8') as f:
       data = json.load(f)
 
